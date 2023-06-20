@@ -73,6 +73,26 @@ public class ContatoDAO implements IContatoDAO {
     }
 
     @Override
+    public ContatoVO buscarPorId(Integer pId) throws Exception {
+        ContatoVO contato = null;
+        String query = "SELECT id, nome, email from contatos where id = '%s'";
+
+        try (Statement stm = connection.createStatement();
+                ResultSet rst = stm.executeQuery(String.format(query, pId))) {
+            if(rst.next()) {
+                contato = new ContatoVO();
+                contato.setId(rst.getInt("id"));
+                contato.setNome(rst.getString("nome"));
+                contato.setEmail(rst.getString("email"));                
+            }
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Falha ao buscar conato.", e);
+            throw e;
+        }
+        return contato;
+    }
+
+    @Override
     public List<ContatoVO> buscarTodos() throws Exception {
 
         List<ContatoVO> contatos = new ArrayList<>();
@@ -108,6 +128,26 @@ public class ContatoDAO implements IContatoDAO {
             logger.log(Level.SEVERE, "Falha ao excluir contato.", e);
             throw e;
         }
+    }
+
+    @Override
+    public ContatoVO ultimoDado() throws Exception {
+        ContatoVO contato = null;
+        String query = "SELECT id, nome, email from contatos WHERE id = (SELECT MAX(id) FROM contatos);";
+
+        try (Statement stm = connection.createStatement();
+                ResultSet rst = stm.executeQuery(String.format(query))) {
+            if(rst.next()) {
+                contato = new ContatoVO();
+                contato.setId(rst.getInt("id"));
+                contato.setNome(rst.getString("nome"));
+                contato.setEmail(rst.getString("email"));                
+            }
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Falha ao buscar contato.", e);
+            throw e;
+        }
+        return contato;
     }
 
 }

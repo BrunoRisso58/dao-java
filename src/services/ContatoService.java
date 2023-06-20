@@ -18,37 +18,40 @@ public class ContatoService implements IContatoService {
 
     @Override
     public void salvar(ContatoVO pContato) throws Exception {
-        // TODO: Implementar método
-        throw new UnsupportedOperationException("Unimplemented method 'salvar'");
+        this.dao.salvar(pContato);
     }
 
     @Override
-    public ContatoVO atualizar(ContatoVO pContato) throws Exception {
-        // TODO: Implementar método
-        throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
+    public void atualizar(ContatoVO pContato) throws Exception {
+        this.dao.atualizar(pContato);
     }
 
     @Override
     public ContatoVO buscarPorEmail(String pEmail) throws Exception {
-        // TODO: Implementar método
-        throw new UnsupportedOperationException("Unimplemented method 'buscarPorEmail'");
+        ContatoVO contato = this.dao.buscarPorEmail(pEmail);
+        return contato;
     }
 
     @Override
     public ContatoVO buscarPorId(Integer pId) throws Exception {
-        // TODO: Implementar método
-        throw new UnsupportedOperationException("Unimplemented method 'buscarPorId'");
+        ContatoVO contato = this.dao.buscarPorId(pId);
+        return contato;
     }
 
     @Override
-    public List<ContatoVO> buscarTodos() {
-        // TODO: Implementar método
-        throw new UnsupportedOperationException("Unimplemented method 'buscarTodos'");
+    public List<ContatoVO> buscarTodos() throws Exception {
+        List<ContatoVO> contatos = this.dao.buscarTodos();
+        return contatos;
     }
 
     @Override
     public void excluir(Integer pId) throws Exception {
-        // TODO: Implementar método
-        throw new UnsupportedOperationException("Unimplemented method 'excluir'");
+        this.dao.excluir(pId);
+    }
+
+    @Override
+    public ContatoVO ultimoDado() throws Exception {
+        ContatoVO contato = this.dao.ultimoDado();
+        return contato;
     }
 }

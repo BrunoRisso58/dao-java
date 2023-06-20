@@ -8,14 +8,16 @@ public interface IContatoService {
 
     void salvar(ContatoVO pContato) throws Exception;
 
-    ContatoVO atualizar(ContatoVO pContato) throws Exception;
+    void atualizar(ContatoVO pContato) throws Exception;
 
     ContatoVO buscarPorEmail(String pEmail) throws Exception;
 
     ContatoVO buscarPorId(Integer pId) throws Exception;
 
-    List<ContatoVO> buscarTodos();
+    List<ContatoVO> buscarTodos() throws Exception;
 
     void excluir(Integer pId) throws Exception;
+
+    ContatoVO ultimoDado() throws Exception;
 
 }
